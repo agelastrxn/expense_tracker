@@ -12,7 +12,7 @@ class SignUpProvider extends ChangeNotifier {
       await SignUpEmailUsecase(repo: repo).signUpWithEmailAndPassword(user: user);
       notifyListeners();
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 }

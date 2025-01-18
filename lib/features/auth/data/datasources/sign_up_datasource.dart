@@ -11,6 +11,5 @@ class SignUpDatasourceImpl implements ISignUpDatasource {
   @override
   Future<void> signUpWithEmailAndPassword({required UserEntity user}) async {
     await auth.createUserWithEmailAndPassword(email: user.email, password: user.password);
-    print('User created');
   }
 }

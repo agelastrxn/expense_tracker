@@ -11,7 +11,7 @@ class SignInProvider extends ChangeNotifier {
       await SignInWithEmailAndPasswordUseCase(repo: repo).singInWithEmailAndPasswordUsecase(email: email, password: password);
       notifyListeners();
     } catch (e) {
-      print(e);
+      throw Exception(e);
     }
   }
 }

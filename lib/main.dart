@@ -1,9 +1,9 @@
 import 'package:expense_tracker/app/constants/texts.dart';
 import 'package:expense_tracker/app/constants/theme.dart';
-import 'package:expense_tracker/features/auth/presentation/pages/sign_in_screen.dart';
-import 'package:expense_tracker/features/auth/presentation/pages/sign_up_screen.dart';
+import 'package:expense_tracker/core/routes.dart';
 import 'package:expense_tracker/features/auth/presentation/provider/sign_in_provider.dart';
 import 'package:expense_tracker/features/auth/presentation/provider/sign_up_provider.dart';
+import 'package:expense_tracker/features/welcome/screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +30,9 @@ class ExpenseTracker extends StatelessWidget {
         theme: AppTheme.lighTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
-        home: SignInScreen(),
+        initialRoute: Routes.welcome,
+        onGenerateRoute: Routes.generateRoute,
+        home: WelcomeScreen(),
       ),
     );
   }

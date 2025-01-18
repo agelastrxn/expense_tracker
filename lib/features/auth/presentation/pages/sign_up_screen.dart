@@ -1,5 +1,6 @@
 import 'package:expense_tracker/app/constants/text_styles.dart';
 import 'package:expense_tracker/app/constants/texts.dart';
+import 'package:expense_tracker/core/routes.dart';
 import 'package:expense_tracker/features/auth/domain/entities/user_entity.dart';
 import 'package:expense_tracker/features/auth/presentation/provider/sign_up_provider.dart';
 import 'package:expense_tracker/features/auth/presentation/widgets/custom_text_field.dart';
@@ -38,6 +39,11 @@ class SignUpScreen extends StatelessWidget {
                 provider.signUpWithEmailAndPassword(user: user);
               },
               child: Text(AppTexts.signUp),
+            ),
+            SizedBox(height: 10),
+            InkWell(
+              onTap: () => Navigator.pushNamedAndRemoveUntil(context, Routes.singIn, (route) => route.settings.name == Routes.welcome),
+              child: Text(AppTexts.notHaveAnAccount, style: AppTextStyles.link),
             ),
           ],
         ),
