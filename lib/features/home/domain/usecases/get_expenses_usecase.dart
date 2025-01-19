@@ -1,12 +1,12 @@
 import 'package:expense_tracker/features/home/domain/entities/expense_entity.dart';
 import 'package:expense_tracker/features/home/domain/repositories/i_expense_repo.dart';
 
-class AddExpenseUsecase {
+class GetExpensesUsecase {
   final IExpenseRepo repo;
 
-  AddExpenseUsecase({required this.repo});
+  GetExpensesUsecase({required this.repo});
 
-  Future<void> addExpense(ExpenseEntity expense) async {
-    await repo.addExpense(expense: expense);
+  Future<List<ExpenseEntity>> getExpenses() async {
+    return await repo.getExpenses();
   }
 }

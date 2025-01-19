@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ExpenseEntity {
   final String expense;
   final double amount;
-  final DateTime date;
+  final Timestamp date;
 
   const ExpenseEntity({
     required this.expense,

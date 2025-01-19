@@ -3,7 +3,7 @@ import 'package:expense_tracker/app/constants/theme.dart';
 import 'package:expense_tracker/core/routes.dart';
 import 'package:expense_tracker/features/auth/presentation/provider/sign_in_provider.dart';
 import 'package:expense_tracker/features/auth/presentation/provider/sign_up_provider.dart';
-import 'package:expense_tracker/features/home/presentation/provider/add_expense_provider.dart';
+import 'package:expense_tracker/features/home/presentation/provider/expense_provider.dart';
 import 'package:expense_tracker/features/welcome/screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class ExpenseTracker extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => SignInProvider()),
         ChangeNotifierProvider(create: (_) => SignUpProvider()),
-        ChangeNotifierProvider(create: (_) => AddExpenseProvider()),
+        ChangeNotifierProvider(create: (_) => ExpenseProvider()),
       ],
       child: MaterialApp(
         title: AppTexts.appName,
@@ -32,7 +32,7 @@ class ExpenseTracker extends StatelessWidget {
         theme: AppTheme.lighTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system,
-        initialRoute: Routes.home,
+        initialRoute: Routes.welcome,
         onGenerateRoute: Routes.generateRoute,
         home: WelcomeScreen(),
       ),
