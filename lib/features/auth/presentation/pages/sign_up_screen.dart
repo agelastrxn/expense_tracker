@@ -3,7 +3,7 @@ import 'package:expense_tracker/app/constants/texts.dart';
 import 'package:expense_tracker/core/routes.dart';
 import 'package:expense_tracker/features/auth/domain/entities/user_entity.dart';
 import 'package:expense_tracker/features/auth/presentation/provider/sign_up_provider.dart';
-import 'package:expense_tracker/features/auth/presentation/widgets/custom_text_field.dart';
+import 'package:expense_tracker/shared/widgets/custom_text_field.dart';
 import 'package:expense_tracker/features/auth/presentation/widgets/psw_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +37,7 @@ class SignUpScreen extends StatelessWidget {
               onPressed: () {
                 UserEntity user = UserEntity(name: name, surName: surName, email: email, password: password);
                 provider.signUpWithEmailAndPassword(user: user);
+                Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
               },
               child: Text(AppTexts.signUp),
             ),

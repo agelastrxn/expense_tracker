@@ -9,4 +9,7 @@ class AppTexts {
   static const String password = 'Password';
   static const String name = 'Name';
   static const String surName = 'Surname';
+  static const String expense = 'Expense';
+  static const String amount = 'Amount';
+  static const String addExpense = 'Add Expense';
 }

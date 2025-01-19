@@ -30,6 +30,7 @@ class AppTheme {
           borderSide: BorderSide(color: AppColors.primary, width: 2),
         ),
       ),
+      appBarTheme: AppBarTheme(backgroundColor: AppColors.primary),
     );
   }
 

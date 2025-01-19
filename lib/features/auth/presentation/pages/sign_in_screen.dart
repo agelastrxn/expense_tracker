@@ -2,7 +2,7 @@ import 'package:expense_tracker/app/constants/text_styles.dart';
 import 'package:expense_tracker/app/constants/texts.dart';
 import 'package:expense_tracker/core/routes.dart';
 import 'package:expense_tracker/features/auth/presentation/provider/sign_in_provider.dart';
-import 'package:expense_tracker/features/auth/presentation/widgets/custom_text_field.dart';
+import 'package:expense_tracker/shared/widgets/custom_text_field.dart';
 import 'package:expense_tracker/features/auth/presentation/widgets/psw_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +29,7 @@ class SignInScreen extends StatelessWidget {
             FilledButton(
               onPressed: () {
                 provider.signInWithEmailAndPassword(email: email, password: password);
+                Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
               },
               child: Text(AppTexts.signIn),
             ),
