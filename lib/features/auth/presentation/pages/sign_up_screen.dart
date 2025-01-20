@@ -2,7 +2,7 @@ import 'package:expense_tracker/app/constants/text_styles.dart';
 import 'package:expense_tracker/app/constants/texts.dart';
 import 'package:expense_tracker/core/routes.dart';
 import 'package:expense_tracker/features/auth/domain/entities/user_entity.dart';
-import 'package:expense_tracker/features/auth/presentation/provider/sign_up_provider.dart';
+import 'package:expense_tracker/features/auth/presentation/provider/auth_provider.dart';
 import 'package:expense_tracker/shared/widgets/custom_text_field.dart';
 import 'package:expense_tracker/features/auth/presentation/widgets/psw_text_field.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +13,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late String name;
-    late String surName;
-    late String email;
-    late String password;
-    final provider = Provider.of<SignUpProvider>(context);
+    final provider = Provider.of<AuthProvider>(context);
     return Scaffold(
       body: Center(
         child: Column(
@@ -25,17 +21,26 @@ class SignUpScreen extends StatelessWidget {
           children: [
             Text(AppTexts.signUp, style: AppTextStyles.title),
             SizedBox(height: 10),
-            CustomTextField(text: AppTexts.name, onChanged: (v) => name = v),
+            CustomTextField(text: AppTexts.name, controller: provider.nameController),
             SizedBox(height: 10),
-            CustomTextField(text: AppTexts.surName, onChanged: (v) => surName = v),
+            CustomTextField(text: AppTexts.surName, controller: provider.surNameController),
             SizedBox(height: 10),
-            CustomTextField(text: AppTexts.email, onChanged: (v) => email = v),
+            CustomTextField(
+              text: AppTexts.email,
+              controller: provider.emailController,
+            ),
             SizedBox(height: 10),
-            PswTextField(onChanged: (v) => password = v),
+            PswTextField(
+              controller: provider.pswController,
+            ),
             SizedBox(height: 10),
             FilledButton(
               onPressed: () {
-                UserEntity user = UserEntity(name: name, surName: surName, email: email, password: password);
+                UserEntity user = UserEntity(
+                    name: provider.nameController.text,
+                    surName: provider.surNameController.text,
+                    email: provider.emailController.text,
+                    password: provider.pswController.text);
                 provider.signUpWithEmailAndPassword(user: user);
                 Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
               },
@@ -44,7 +49,7 @@ class SignUpScreen extends StatelessWidget {
             SizedBox(height: 10),
             InkWell(
               onTap: () => Navigator.pushNamedAndRemoveUntil(context, Routes.singIn, (route) => route.settings.name == Routes.welcome),
-              child: Text(AppTexts.notHaveAnAccount, style: AppTextStyles.link),
+              child: Text(AppTexts.alreadyHaveAnAccount, style: AppTextStyles.link),
             ),
           ],
         ),

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  final TextInputType? keyboardType;
-  final TextEditingController? controller;
   final String text;
+  final TextEditingController controller;
+  final TextInputType? keyboardType;
   final Function(String)? onChanged;
   const CustomTextField({
     super.key,
     required this.text,
+    required this.controller,
     this.keyboardType,
     this.onChanged,
-    this.controller,
+    
   });
 
   @override

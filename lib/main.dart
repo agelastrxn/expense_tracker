@@ -1,8 +1,7 @@
 import 'package:expense_tracker/app/constants/texts.dart';
 import 'package:expense_tracker/app/constants/theme.dart';
 import 'package:expense_tracker/core/routes.dart';
-import 'package:expense_tracker/features/auth/presentation/provider/sign_in_provider.dart';
-import 'package:expense_tracker/features/auth/presentation/provider/sign_up_provider.dart';
+import 'package:expense_tracker/features/auth/presentation/provider/auth_provider.dart';
 import 'package:expense_tracker/features/home/presentation/provider/expense_provider.dart';
 import 'package:expense_tracker/features/welcome/screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,8 +21,7 @@ class ExpenseTracker extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => SignInProvider()),
-        ChangeNotifierProvider(create: (_) => SignUpProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ExpenseProvider()),
       ],
       child: MaterialApp(

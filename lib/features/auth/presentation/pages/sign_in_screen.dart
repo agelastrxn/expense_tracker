@@ -1,7 +1,7 @@
 import 'package:expense_tracker/app/constants/text_styles.dart';
 import 'package:expense_tracker/app/constants/texts.dart';
 import 'package:expense_tracker/core/routes.dart';
-import 'package:expense_tracker/features/auth/presentation/provider/sign_in_provider.dart';
+import 'package:expense_tracker/features/auth/presentation/provider/auth_provider.dart';
 import 'package:expense_tracker/shared/widgets/custom_text_field.dart';
 import 'package:expense_tracker/features/auth/presentation/widgets/psw_text_field.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +12,7 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late String email;
-    late String password;
-    final provider = Provider.of<SignInProvider>(context);
+    final provider = Provider.of<AuthProvider>(context);
     return Scaffold(
       body: Center(
         child: Column(
@@ -22,13 +20,21 @@ class SignInScreen extends StatelessWidget {
           children: [
             Text(AppTexts.signIn, style: AppTextStyles.title),
             SizedBox(height: 10),
-            CustomTextField(text: AppTexts.email, onChanged: (v) => email = v),
+            CustomTextField(
+              text: AppTexts.email,
+              controller: provider.emailController,
+            ),
             SizedBox(height: 10),
-            PswTextField(onChanged: (v) => password = v),
+            PswTextField(
+              controller: provider.pswController,
+            ),
             SizedBox(height: 10),
             FilledButton(
               onPressed: () {
-                provider.signInWithEmailAndPassword(email: email, password: password);
+                provider.signInWithEmailAndPassword(
+                  email: provider.emailController.text,
+                  password: provider.pswController.text,
+                );
                 Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
               },
               child: Text(AppTexts.signIn),
@@ -36,7 +42,7 @@ class SignInScreen extends StatelessWidget {
             SizedBox(height: 10),
             InkWell(
               onTap: () => Navigator.pushNamedAndRemoveUntil(context, Routes.signUp, (route) => route.settings.name == Routes.welcome),
-              child: Text(AppTexts.alreadyHaveAnAccount, style: AppTextStyles.link),
+              child: Text(AppTexts.notHaveAnAccount, style: AppTextStyles.link),
             ),
           ],
         ),

@@ -42,3 +42,4 @@ class ExpenseProvider extends ChangeNotifier {
     amountController.clear();
   }
 }
+
