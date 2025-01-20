@@ -31,10 +31,12 @@ class AddExpenseScreen extends StatelessWidget {
           SizedBox(height: 10),
           FilledButton(
               onPressed: () {
+                final now = Timestamp.now();
                 ExpenseEntity newExpense = ExpenseEntity(
+                  id: now.toString(),
                   expense: expenseController.text,
                   amount: double.parse(amountController.text),
-                  date: Timestamp.now(),
+                  date: now,
                 );
                 provider.addExpense(newExpense);
                 Navigator.pop(context);

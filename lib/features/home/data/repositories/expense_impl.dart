@@ -17,4 +17,9 @@ class ExpenseImpl implements IExpenseRepo {
   Future<List<ExpenseModel>> getExpenses() async {
     return await datasource.getExpenses();
   }
+
+  @override
+  Future<void> deleteExpense({required String docId}) async {
+    return datasource.deleteExpense(docId: docId);
+  }
 }
