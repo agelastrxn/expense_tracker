@@ -6,7 +6,7 @@ class SignUpEmailUsecase {
 
   SignUpEmailUsecase({required this.repo});
 
-  Future<void> signUpWithEmailAndPassword({required UserEntity user}) async {
-    await repo.signUpWithEmailAndPassword(user: user);
+  Future<UserEntity> signUpWithEmailAndPassword({required UserEntity user}) async {
+    return await repo.signUpWithEmailAndPassword(user: user);
   }
 }

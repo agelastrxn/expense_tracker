@@ -1,3 +1,4 @@
+import 'package:expense_tracker/features/auth/domain/entities/user_entity.dart';
 import 'package:expense_tracker/features/auth/presentation/pages/sign_in_screen.dart';
 import 'package:expense_tracker/features/auth/presentation/pages/sign_up_screen.dart';
 import 'package:expense_tracker/features/home/presentation/pages/home_screen.dart';
@@ -19,14 +20,16 @@ class Routes {
       case signUp:
         return MaterialPageRoute(builder: (_) => SignUpScreen());
       case home:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        final user = settings.arguments as UserEntity;
+        return MaterialPageRoute(builder: (_) => HomeScreen(user: user));
       default:
         return MaterialPageRoute(
-            builder: (_) => Scaffold(
-                  body: Center(
-                    child: Text('No route defined for ${settings.name}'),
-                  ),
-                ));
+          builder: (_) => Scaffold(
+            body: Center(
+              child: Text('No route defined for ${settings.name}'),
+            ),
+          ),
+        );
     }
   }
 }

@@ -1,4 +1,4 @@
-import 'package:expense_tracker/features/auth/data/datasources/sign_in_remote_datasource.dart';
+import 'package:expense_tracker/features/auth/data/datasources/sign_in_datasource.dart';
 import 'package:expense_tracker/features/auth/data/datasources/sign_up_datasource.dart';
 import 'package:expense_tracker/features/auth/data/repository/sign_in_repo_impl.dart';
 import 'package:expense_tracker/features/auth/data/repository/sign_up_repo_impl.dart';
@@ -14,11 +14,12 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController pswController = TextEditingController();
   final nameController = TextEditingController();
   final surNameController = TextEditingController();
+  UserEntity? currentUser;
 
   Future<void> signInWithEmailAndPassword({required String email, required String password}) async {
     try {
       ISignInRepo repo = SignInRepoImpl(datasource: SignInRemoteDatasourceImpl());
-      await SignInWithEmailAndPasswordUseCase(repo: repo).singInWithEmailAndPasswordUsecase(email: email, password: password);
+      currentUser = await SignInWithEmailAndPasswordUseCase(repo: repo).singInWithEmailAndPasswordUsecase(email: email, password: password);
       notifyListeners();
     } catch (e) {
       throw Exception(e);
@@ -28,7 +29,7 @@ class AuthProvider extends ChangeNotifier {
   Future<void> signUpWithEmailAndPassword({required UserEntity user}) async {
     try {
       ISignUpRepo repo = SignUpRepoImpl(datasource: SignUpDatasourceImpl());
-      await SignUpEmailUsecase(repo: repo).signUpWithEmailAndPassword(user: user);
+      currentUser = await SignUpEmailUsecase(repo: repo).signUpWithEmailAndPassword(user: user);
       notifyListeners();
     } catch (e) {
       throw Exception(e);

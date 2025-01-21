@@ -35,14 +35,17 @@ class SignUpScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             FilledButton(
-              onPressed: () {
+              onPressed: () async {
                 UserEntity user = UserEntity(
-                    name: provider.nameController.text,
-                    surName: provider.surNameController.text,
-                    email: provider.emailController.text,
-                    password: provider.pswController.text);
-                provider.signUpWithEmailAndPassword(user: user);
-                Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false);
+                  name: provider.nameController.text,
+                  surName: provider.surNameController.text,
+                  email: provider.emailController.text,
+                  password: provider.pswController.text,
+                  expenses: [],
+                );
+                await provider.signUpWithEmailAndPassword(user: user);
+                if (!context.mounted) return;
+                Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false, arguments: provider.currentUser);
               },
               child: Text(AppTexts.signUp),
             ),

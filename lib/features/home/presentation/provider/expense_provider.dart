@@ -6,17 +6,12 @@ import 'package:expense_tracker/features/home/domain/usecases/add_expense_usecas
 import 'package:expense_tracker/features/home/domain/usecases/delete_expense_usecase.dart';
 import 'package:expense_tracker/features/home/domain/usecases/get_expenses_usecase.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class ExpenseProvider extends ChangeNotifier {
   final IExpenseRepo repo = ExpenseImpl(datasource: ExpenseDatasourceImpl());
   TextEditingController expenseController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   List<ExpenseEntity> expenses = [];
-
-  // void uniqueId() {
-  //   Random().next
-  // }
 
   ExpenseProvider() {
     getExpenses();

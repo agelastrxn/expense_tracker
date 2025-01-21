@@ -1,17 +1,19 @@
 import 'package:expense_tracker/app/constants/texts.dart';
+import 'package:expense_tracker/features/auth/domain/entities/user_entity.dart';
 import 'package:expense_tracker/features/home/presentation/pages/add_expense_screen.dart';
 import 'package:expense_tracker/features/home/presentation/provider/expense_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final UserEntity user;
+  const HomeScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ExpenseProvider>(context, listen: true);
     return Scaffold(
-      appBar: AppBar(title: Text('Welcome')),
+      appBar: AppBar(title: Text("${AppTexts.welcome} ${user.name} 👋")),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () => showModalBottomSheet<void>(context: context, builder: (context) => AddExpenseScreen()),
           label: Text(AppTexts.addExpense)),
@@ -32,23 +34,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
-// Consumer<ExpenseProvider>(
-//         builder: (context, state, child) {
-//           return ListView.builder(
-//             itemCount: state.expenses.length,
-//             itemBuilder: (context, index) {
-//               return InkWell(
-//                 onLongPress: () {
-//                   state.deleteExpense(docId: state.expenses[index].date.toString());
-//                 },
-//                 child: ListTile(
-//                   title: Text(state.expenses[index].expense),
-//                   subtitle: Text(state.expenses[index].amount.toString()),
-//                 ),
-//               );
-//             },
-//           );
-//         },
-//       ),

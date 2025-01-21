@@ -13,6 +13,7 @@ class ExpenseDatasourceImpl implements IExpenseDatasource {
   @override
   Future<void> addExpense({required ExpenseModel expense}) async {
     await storage.collection('expenses').doc(expense.id).set(expense.toJson());
+    // await storage.collection('users').doc("userID").update({'expenses'});
   }
 
   @override
