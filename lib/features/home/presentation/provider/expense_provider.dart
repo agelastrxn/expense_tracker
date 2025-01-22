@@ -13,13 +13,9 @@ class ExpenseProvider extends ChangeNotifier {
   TextEditingController amountController = TextEditingController();
   List<ExpenseEntity> expenses = [];
 
-  ExpenseProvider() {
-    getExpenses();
-  }
-
-  Future<void> getExpenses() async {
+  Future<void> getExpenses({required String userId}) async {
     try {
-      final List<ExpenseEntity> expenses = await GetExpensesUsecase(repo: repo).getExpenses();
+      final List<ExpenseEntity> expenses = await GetExpensesUsecase(repo: repo).getExpenses(userId: userId);
       this.expenses = expenses;
       notifyListeners();
     } catch (e) {
@@ -27,19 +23,19 @@ class ExpenseProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> addExpense(ExpenseEntity expense) async {
+  Future<void> addExpense(ExpenseEntity expense, String userId) async {
     try {
-      await AddExpenseUsecase(repo: repo).addExpense(expense);
+      await AddExpenseUsecase(repo: repo).addExpense(expense, userId);
       clearController();
-      getExpenses();
+      getExpenses(userId: userId);
     } catch (e) {
       throw Exception(e);
     }
   }
 
-  Future<void> deleteExpense({required String docId}) async {
-    await DeleteExpenseUseCase(repo: repo).deleteExpense(docId: docId);
-    getExpenses();
+  Future<void> deleteExpense({required String docId, required String userId}) async {
+    await DeleteExpenseUseCase(repo: repo).deleteExpense(docId: docId, userId: userId);
+    getExpenses(userId: userId);
     notifyListeners();
   }
 

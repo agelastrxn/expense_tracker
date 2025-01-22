@@ -11,18 +11,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ExpenseProvider>(context, listen: true);
+    final provider = Provider.of<ExpenseProvider>(context);
+    getExpenses(provider);
     return Scaffold(
       appBar: AppBar(title: Text("${AppTexts.welcome} ${user.name} 👋")),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => showModalBottomSheet<void>(context: context, builder: (context) => AddExpenseScreen()),
+          onPressed: () => showModalBottomSheet<void>(context: context, builder: (context) => AddExpenseScreen(userId: user.uid!)),
           label: Text(AppTexts.addExpense)),
       body: ListView.builder(
         itemCount: provider.expenses.length,
         itemBuilder: (context, index) {
           return InkWell(
             onLongPress: () {
-              provider.deleteExpense(docId: provider.expenses[index].date.toString());
+              provider.deleteExpense(docId: provider.expenses[index].date.toString(), userId: user.uid!);
             },
             child: ListTile(
               title: Text(provider.expenses[index].expense),
@@ -32,5 +33,9 @@ class HomeScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void getExpenses(ExpenseProvider provider) async {
+    await provider.getExpenses(userId: user.uid!);
   }
 }

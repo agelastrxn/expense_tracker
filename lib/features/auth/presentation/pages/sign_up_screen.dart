@@ -41,7 +41,6 @@ class SignUpScreen extends StatelessWidget {
                   surName: provider.surNameController.text,
                   email: provider.emailController.text,
                   password: provider.pswController.text,
-                  expenses: [],
                 );
                 await provider.signUpWithEmailAndPassword(user: user);
                 if (!context.mounted) return;

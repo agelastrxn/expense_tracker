@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AddExpenseScreen extends StatelessWidget {
-  const AddExpenseScreen({super.key});
+  final String userId;
+  const AddExpenseScreen({super.key, required this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class AddExpenseScreen extends StatelessWidget {
           ),
           SizedBox(height: 10),
           FilledButton(
-              onPressed: () {
+              onPressed: () async {
                 final now = Timestamp.now();
                 ExpenseEntity newExpense = ExpenseEntity(
                   id: now.toString(),
@@ -38,7 +39,8 @@ class AddExpenseScreen extends StatelessWidget {
                   amount: double.parse(amountController.text),
                   date: now,
                 );
-                provider.addExpense(newExpense);
+                await provider.addExpense(newExpense, userId);
+                if (!context.mounted) return;
                 Navigator.pop(context);
               },
               child: Text(AppTexts.addExpense)),

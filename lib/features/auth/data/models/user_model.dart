@@ -1,5 +1,4 @@
 import 'package:expense_tracker/features/auth/domain/entities/user_entity.dart';
-import 'package:expense_tracker/features/home/data/models/expense_model.dart';
 
 class UserModel extends UserEntity {
   UserModel({
@@ -8,17 +7,16 @@ class UserModel extends UserEntity {
     required super.password,
     required super.name,
     required super.surName,
-    required super.expenses,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-        uid: json['uid'],
-        email: json['email'],
-        password: json['password'],
-        name: json['name'],
-        surName: json['surName'],
-        expenses: (json['expenses'] as List<dynamic>?)!.map((expense) => ExpenseModel.fromJson(expense)).toList());
+      uid: json['uid'],
+      email: json['email'],
+      password: json['password'],
+      name: json['name'],
+      surName: json['surName'],
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -28,7 +26,6 @@ class UserModel extends UserEntity {
       'password': password,
       'name': name,
       'surName': surName,
-      'expenses': expenses,
     };
   }
 
@@ -39,7 +36,6 @@ class UserModel extends UserEntity {
       password: userEntity.password,
       name: userEntity.name,
       surName: userEntity.surName,
-      expenses: userEntity.expenses,
     );
   }
 }

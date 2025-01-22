@@ -22,7 +22,6 @@ class SignUpDatasourceImpl implements ISignUpDatasource {
       password: user.password,
       name: user.name,
       surName: user.surName,
-      expenses: [],
     );
     await saveUserToFirestore(userModel);
     return userModel;

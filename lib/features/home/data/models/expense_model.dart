@@ -12,7 +12,7 @@ class ExpenseModel extends ExpenseEntity {
     return ExpenseModel(
       id: json['id'],
       expense: json['expense'],
-      amount: json['amount'],
+      amount: json['amount'].toDouble(),
       date: json['date'],
     );
   }
@@ -35,5 +35,3 @@ class ExpenseModel extends ExpenseEntity {
     );
   }
 }
-
-

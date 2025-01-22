@@ -6,7 +6,7 @@ class AddExpenseUsecase {
 
   AddExpenseUsecase({required this.repo});
 
-  Future<void> addExpense(ExpenseEntity expense) async {
-    await repo.addExpense(expense: expense);
+  Future<void> addExpense(ExpenseEntity expense, String userId) async {
+    await repo.addExpense(expense: expense, userId: userId);
   }
 }

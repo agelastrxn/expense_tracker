@@ -6,7 +6,7 @@ class GetExpensesUsecase {
 
   GetExpensesUsecase({required this.repo});
 
-  Future<List<ExpenseEntity>> getExpenses() async {
-    return await repo.getExpenses();
+  Future<List<ExpenseEntity>> getExpenses({required String userId}) async {
+    return await repo.getExpenses(userId: userId);
   }
 }

@@ -5,7 +5,7 @@ class DeleteExpenseUseCase {
 
   DeleteExpenseUseCase({required this.repo});
 
-  Future<void> deleteExpense({required String docId}) async {
-    return repo.deleteExpense(docId: docId);
+  Future<void> deleteExpense({required String docId, required String userId}) async {
+    return repo.deleteExpense(docId: docId, userId: userId);
   }
 }
