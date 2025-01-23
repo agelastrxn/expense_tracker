@@ -11,23 +11,27 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ExpenseProvider>(context);
-    getExpenses(provider);
+    final expenseProvider = Provider.of<ExpenseProvider>(context);
+    getExpenses(expenseProvider);
     return Scaffold(
-      appBar: AppBar(title: Text("${AppTexts.welcome} ${user.name} 👋")),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => showModalBottomSheet<void>(context: context, builder: (context) => AddExpenseScreen(userId: user.uid!)),
-          label: Text(AppTexts.addExpense)),
+        onPressed: () => showModalBottomSheet<void>(
+          context: context,
+          builder: (context) => AddExpenseScreen(userId: user.uid!),
+        ),
+        label: Text(AppTexts.addExpense),
+      ),
+      appBar: AppBar(title: Text("${AppTexts.welcome} ${user.name}")),
       body: ListView.builder(
-        itemCount: provider.expenses.length,
+        itemCount: expenseProvider.expenses.length,
         itemBuilder: (context, index) {
           return InkWell(
             onLongPress: () {
-              provider.deleteExpense(docId: provider.expenses[index].date.toString(), userId: user.uid!);
+              expenseProvider.deleteExpense(docId: expenseProvider.expenses[index].date.toString(), userId: user.uid!);
             },
             child: ListTile(
-              title: Text(provider.expenses[index].expense),
-              subtitle: Text(provider.expenses[index].amount.toString()),
+              title: Text(expenseProvider.expenses[index].expense),
+              subtitle: Text(expenseProvider.expenses[index].amount.toString()),
             ),
           );
         },

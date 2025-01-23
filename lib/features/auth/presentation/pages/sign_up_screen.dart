@@ -44,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
                 );
                 await provider.signUpWithEmailAndPassword(user: user);
                 if (!context.mounted) return;
-                Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false, arguments: provider.currentUser);
+                Navigator.pushNamedAndRemoveUntil(context, Routes.navBar, (route) => false, arguments: provider.currentUser);
               },
               child: Text(AppTexts.signUp),
             ),

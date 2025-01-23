@@ -30,13 +30,13 @@ class SignInScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             FilledButton(
-              onPressed: ()  async {
+              onPressed: () async {
                 await provider.signInWithEmailAndPassword(
                   email: provider.emailController.text,
                   password: provider.pswController.text,
                 );
                 if (!context.mounted) return;
-                Navigator.pushNamedAndRemoveUntil(context, Routes.home, (route) => false, arguments: provider.currentUser);
+                Navigator.pushNamedAndRemoveUntil(context, Routes.navBar, (route) => false, arguments: provider.currentUser);
               },
               child: Text(AppTexts.signIn),
             ),

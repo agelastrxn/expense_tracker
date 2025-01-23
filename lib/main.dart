@@ -3,6 +3,7 @@ import 'package:expense_tracker/app/constants/theme.dart';
 import 'package:expense_tracker/core/routes.dart';
 import 'package:expense_tracker/features/auth/presentation/provider/auth_provider.dart';
 import 'package:expense_tracker/features/home/presentation/provider/expense_provider.dart';
+import 'package:expense_tracker/features/home/presentation/provider/navigation_bar_provider.dart';
 import 'package:expense_tracker/features/welcome/screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class ExpenseTracker extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ExpenseProvider()),
+        ChangeNotifierProvider(create: (_) => NavigationBarProvider()),
       ],
       child: MaterialApp(
         title: AppTexts.appName,
