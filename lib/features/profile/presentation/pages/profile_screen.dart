@@ -1,6 +1,7 @@
 import 'package:expense_tracker/app/constants/colors.dart';
 import 'package:expense_tracker/app/constants/text_styles.dart';
 import 'package:expense_tracker/app/constants/texts.dart';
+import 'package:expense_tracker/core/routes.dart';
 import 'package:expense_tracker/features/auth/domain/entities/user_entity.dart';
 import 'package:expense_tracker/features/home/domain/entities/expense_entity.dart';
 import 'package:expense_tracker/features/profile/presentation/provider/profile_provider.dart';
@@ -42,7 +43,12 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(height: 10),
           ListTile(title: Text(AppTexts.totalExpense, style: AppTextStyles.title), subtitle: Text(provider.total!)),
           Expanded(child: SizedBox()),
-          FilledButton(onPressed: () {}, child: Text(AppTexts.logOut)),
+          FilledButton(
+              onPressed: () {
+                provider.logOut();
+                Navigator.pushNamedAndRemoveUntil(context, Routes.singIn, (route) => false);
+              },
+              child: Text(AppTexts.logOut)),
           SizedBox(height: 20),
         ],
       ),

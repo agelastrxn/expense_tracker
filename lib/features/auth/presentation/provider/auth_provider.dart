@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 class AuthProvider extends ChangeNotifier {
   final SignInWithEmailUseCase signInUseCase = getIt.get();
   final SignUpWithEmailUsecase signUpUseCase = getIt.get();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController pswController = TextEditingController();
+  final emailController = TextEditingController();
+  final pswController = TextEditingController();
   final nameController = TextEditingController();
   final surNameController = TextEditingController();
   UserEntity? currentUser;
@@ -29,5 +29,10 @@ class AuthProvider extends ChangeNotifier {
     } catch (e) {
       throw Exception(e);
     }
+  }
+
+  void clearController() {
+    emailController.clear();
+    pswController.clear();
   }
 }

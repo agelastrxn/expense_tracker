@@ -10,7 +10,6 @@ class GoogleNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final navBarProvider = Provider.of<NavigationBarProvider>(context);
-
     return GNav(
       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
       tabBorderRadius: 20,

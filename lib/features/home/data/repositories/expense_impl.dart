@@ -5,7 +5,7 @@ import 'package:expense_tracker/features/home/domain/entities/expense_entity.dar
 import 'package:expense_tracker/features/home/domain/repositories/i_expense_repo.dart';
 
 class ExpenseRepoImpl implements IExpenseRepo {
-  final ExpenseDatasourceImpl datasource = getIt.get();
+  final IExpenseDatasource datasource = getIt.get();
 
   @override
   Future<void> addExpense({required ExpenseEntity expense, required String userId}) async {

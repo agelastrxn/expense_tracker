@@ -45,12 +45,16 @@ class SignUpScreen extends StatelessWidget {
                 await provider.signUpWithEmailAndPassword(user: user);
                 if (!context.mounted) return;
                 Navigator.pushNamedAndRemoveUntil(context, Routes.navBar, (route) => false, arguments: provider.currentUser);
+                provider.clearController();
               },
               child: Text(AppTexts.signUp),
             ),
             SizedBox(height: 10),
             InkWell(
-              onTap: () => Navigator.pushNamedAndRemoveUntil(context, Routes.singIn, (route) => route.settings.name == Routes.welcome),
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(context, Routes.singIn, (route) => route.settings.name == Routes.welcome);
+                provider.clearController();
+              },
               child: Text(AppTexts.alreadyHaveAnAccount, style: AppTextStyles.link),
             ),
           ],
