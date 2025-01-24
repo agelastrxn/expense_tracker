@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
     final expenseProvider = Provider.of<ExpenseProvider>(context);
     getExpenses(expenseProvider);
     return Scaffold(
+      appBar: AppBar(title: Text("${AppTexts.welcome} ${user.name}")),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => showModalBottomSheet<void>(
           context: context,
@@ -21,7 +22,6 @@ class HomeScreen extends StatelessWidget {
         ),
         label: Text(AppTexts.addExpense),
       ),
-      appBar: AppBar(title: Text("${AppTexts.welcome} ${user.name}")),
       body: ListView.builder(
         itemCount: expenseProvider.expenses.length,
         itemBuilder: (context, index) {
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
             },
             child: ListTile(
               title: Text(expenseProvider.expenses[index].expense),
-              subtitle: Text(expenseProvider.expenses[index].amount.toString()),
+              trailing: Text('${expenseProvider.expenses[index].amount.toString()} AZN'),
             ),
           );
         },

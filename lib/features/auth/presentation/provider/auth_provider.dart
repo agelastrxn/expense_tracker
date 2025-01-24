@@ -1,15 +1,12 @@
-import 'package:expense_tracker/features/auth/data/datasources/sign_in_datasource.dart';
-import 'package:expense_tracker/features/auth/data/datasources/sign_up_datasource.dart';
-import 'package:expense_tracker/features/auth/data/repository/sign_in_repo_impl.dart';
-import 'package:expense_tracker/features/auth/data/repository/sign_up_repo_impl.dart';
+import 'package:expense_tracker/core/get_it.dart';
 import 'package:expense_tracker/features/auth/domain/entities/user_entity.dart';
-import 'package:expense_tracker/features/auth/domain/repositories/i_sign_in_repo.dart';
-import 'package:expense_tracker/features/auth/domain/repositories/i_sign_up_repo.dart';
 import 'package:expense_tracker/features/auth/domain/usecases/sign_in_email_usecase.dart';
 import 'package:expense_tracker/features/auth/domain/usecases/sign_up_email_usecase.dart';
 import 'package:flutter/material.dart';
 
 class AuthProvider extends ChangeNotifier {
+  final SignInWithEmailUseCase signInUseCase = getIt.get();
+  final SignUpWithEmailUsecase signUpUseCase = getIt.get();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController pswController = TextEditingController();
   final nameController = TextEditingController();
@@ -18,8 +15,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> signInWithEmailAndPassword({required String email, required String password}) async {
     try {
-      ISignInRepo repo = SignInRepoImpl(datasource: SignInRemoteDatasourceImpl());
-      currentUser = await SignInWithEmailAndPasswordUseCase(repo: repo).singInWithEmailAndPasswordUsecase(email: email, password: password);
+      currentUser = await signInUseCase.singInWithEmailAndPasswordUsecase(email: email, password: password);
       notifyListeners();
     } catch (e) {
       throw Exception(e);
@@ -28,8 +24,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> signUpWithEmailAndPassword({required UserEntity user}) async {
     try {
-      ISignUpRepo repo = SignUpRepoImpl(datasource: SignUpDatasourceImpl());
-      currentUser = await SignUpEmailUsecase(repo: repo).signUpWithEmailAndPassword(user: user);
+      currentUser = await signUpUseCase.signUpWithEmailAndPassword(user: user);
       notifyListeners();
     } catch (e) {
       throw Exception(e);

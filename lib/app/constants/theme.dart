@@ -30,7 +30,15 @@ class AppTheme {
           borderSide: BorderSide(color: AppColors.primary, width: 2),
         ),
       ),
-      appBarTheme: AppBarTheme(backgroundColor: AppColors.primary),
+      appBarTheme: AppBarTheme(
+        backgroundColor: AppColors.primary,
+        toolbarHeight: 55,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
+          ),
+        ),
+      ),
     );
   }
 

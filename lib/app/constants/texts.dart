@@ -13,4 +13,6 @@ class AppTexts {
   static const String amount = 'Amount';
   static const String addExpense = 'Add Expense';
   static const String welcome = 'Welcome';
+  static const String totalExpense = 'Total expense';
+  static const String logOut = 'Log out';
 }

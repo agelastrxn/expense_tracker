@@ -1,12 +1,11 @@
+import 'package:expense_tracker/core/get_it.dart';
 import 'package:expense_tracker/features/home/data/datasources/expense_datasource.dart';
 import 'package:expense_tracker/features/home/data/models/expense_model.dart';
 import 'package:expense_tracker/features/home/domain/entities/expense_entity.dart';
 import 'package:expense_tracker/features/home/domain/repositories/i_expense_repo.dart';
 
-class ExpenseImpl implements IExpenseRepo {
-  final ExpenseDatasourceImpl datasource;
-
-  ExpenseImpl({required this.datasource});
+class ExpenseRepoImpl implements IExpenseRepo {
+  final ExpenseDatasourceImpl datasource = getIt.get();
 
   @override
   Future<void> addExpense({required ExpenseEntity expense, required String userId}) async {
