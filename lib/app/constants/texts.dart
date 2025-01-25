@@ -15,4 +15,5 @@ class AppTexts {
   static const String welcome = 'Welcome';
   static const String totalExpense = 'Total expense';
   static const String logOut = 'Log out';
+  static const String theme = 'Theme';
 }

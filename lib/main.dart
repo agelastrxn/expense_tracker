@@ -30,15 +30,20 @@ class ExpenseTracker extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => NavigationBarProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
       ],
-      child: MaterialApp(
-        title: AppTexts.appName,
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.lighTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.system,
-        initialRoute: Routes.welcome,
-        onGenerateRoute: Routes.generateRoute,
-        home: WelcomeScreen(),
+      child: Builder(
+        builder: (context) {
+          final profileProvider = Provider.of<ProfileProvider>(context);
+          return MaterialApp(
+            title: AppTexts.appName,
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: profileProvider.themeToggle ? ThemeMode.light : ThemeMode.dark,
+            initialRoute: Routes.welcome,
+            onGenerateRoute: Routes.generateRoute,
+            home: WelcomeScreen(),
+          );
+        },
       ),
     );
   }

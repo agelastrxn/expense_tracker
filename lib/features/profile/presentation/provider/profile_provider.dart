@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class ProfileProvider extends ChangeNotifier {
   final SignOutUsecase signOutUsecase = getIt.get();
+  bool themeToggle = true;
   String? total;
 
   void calculateTotal(expenses) {
@@ -11,10 +12,15 @@ class ProfileProvider extends ChangeNotifier {
     for (var expense in expenses) {
       total += expense.amount;
     }
-    this.total = total.toString();
+    this.total = total.toStringAsFixed(2);
   }
 
   void logOut() async {
     await signOutUsecase.signOut();
+  }
+
+  void changeTheme(value) {
+    themeToggle = value;
+    notifyListeners();
   }
 }

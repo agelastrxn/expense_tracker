@@ -42,6 +42,6 @@ class AppTheme {
     );
   }
 
-  static ThemeData lighTheme = theme(Brightness.light);
+  static ThemeData lightTheme = theme(Brightness.light);
   static ThemeData darkTheme = theme(Brightness.dark);
 }
