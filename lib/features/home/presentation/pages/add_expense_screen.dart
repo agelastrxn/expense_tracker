@@ -35,7 +35,7 @@ class AddExpenseScreen extends StatelessWidget {
                 final now = Timestamp.now();
                 ExpenseEntity newExpense = ExpenseEntity(
                   id: now.toString(),
-                  expense: expenseController.text,
+                  title: expenseController.text,
                   amount: double.parse(amountController.text),
                   date: now,
                 );

@@ -3,7 +3,7 @@ import 'package:expense_tracker/features/home/domain/entities/expense_entity.dar
 class ExpenseModel extends ExpenseEntity {
   ExpenseModel({
     required super.id,
-    required super.expense,
+    required super.title,
     required super.amount,
     required super.date,
   });
@@ -11,7 +11,7 @@ class ExpenseModel extends ExpenseEntity {
   factory ExpenseModel.fromJson(Map<String, dynamic> json) {
     return ExpenseModel(
       id: json['id'],
-      expense: json['expense'],
+      title: json['title'],
       amount: json['amount'].toDouble(),
       date: json['date'],
     );
@@ -20,7 +20,7 @@ class ExpenseModel extends ExpenseEntity {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'expense': expense,
+      'title': title,
       'amount': amount,
       'date': date,
     };
@@ -29,7 +29,7 @@ class ExpenseModel extends ExpenseEntity {
   static ExpenseModel entityToModel(ExpenseEntity expense) {
     return ExpenseModel(
       id: expense.id,
-      expense: expense.expense,
+      title: expense.title,
       amount: expense.amount,
       date: expense.date,
     );

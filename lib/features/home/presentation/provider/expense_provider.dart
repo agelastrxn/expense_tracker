@@ -12,11 +12,16 @@ class ExpenseProvider extends ChangeNotifier {
   TextEditingController expenseController = TextEditingController();
   TextEditingController amountController = TextEditingController();
   List<ExpenseEntity> expenses = [];
+  Map<DateTime, List<ExpenseEntity>> groupedExpenses = {};
+  List<DateTime> sortedDates = [];
 
   Future<void> getExpenses({required String userId}) async {
     try {
-      final expenses = await getExpensesUsecase.getExpenses(userId: userId);
-      this.expenses = expenses;
+      groupedExpenses.clear();
+      sortedDates.clear();
+      expenses.clear();
+      expenses = await getExpensesUsecase.getExpenses(userId: userId);
+      groupedExpensesMethod();
       notifyListeners();
     } catch (e) {
       throw Exception(e);
@@ -35,12 +40,20 @@ class ExpenseProvider extends ChangeNotifier {
 
   Future<void> deleteExpense({required String docId, required String userId}) async {
     await deleteExpenseUseCase.deleteExpense(docId: docId, userId: userId);
-    getExpenses(userId: userId);
     notifyListeners();
   }
 
   void clearController() {
     expenseController.clear();
     amountController.clear();
+  }
+
+  void groupedExpensesMethod() {
+    for (var expense in expenses) {
+      final expenseWithDate = expense.date.toDate();
+      DateTime dateKey = DateTime(expenseWithDate.year, expenseWithDate.month, expenseWithDate.day);
+      groupedExpenses.putIfAbsent(dateKey, () => []).add(expense);
+      sortedDates = groupedExpenses.keys.toList()..sort((a, b) => b.compareTo(a));
+    }
   }
 }
